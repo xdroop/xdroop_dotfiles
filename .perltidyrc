@@ -1,0 +1,8 @@
+-bl    # braces on new lines
+-pt=2  # tight bracket spacing
+-bt=2  # tight bracket spacing
+-sbt=2 # tight bracket spacing
+-noll  # don't outdent long lines
+-l=0   # no limit on line length
+-nbbc  # no blanks before comments
+-nbbb  # no blanks before blocks

@@ -1,0 +1,3 @@
+# Smart History Completion
+"\M-[A":history-search-backward
+"\M-[B":history-search-forward
