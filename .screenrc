@@ -1,0 +1,17 @@
+# Status line
+hardstatus alwayslastline
+#hardstatus string '%H %{= mK}%-Lw%{= KW}%50>%n%f* %t%{= mK}%+Lw%< %{= kG}%-=%D %d %M %Y %c:%s%{-}'
+hardstatus string '%H %{= kG}%c:%s%{-}%{= KW}%50> %n:%h'
+# scrollback depth
+defscrollback 10000
+# detach on hangup
+autodetach on
+# no startup msg
+startup_message off
+# sane-er window list
+windowlist string "%4n %h%=%f"
+# Change the xterm initialization string from is2=\E[!p\E[?3;4l\E[4l\E>
+# (This fixes the "Aborted because of window size change" konsole symptoms found
+#  in bug #134198)
+# (In practice, this stops some terminals from resizing to 80 columns when screen starts or re-attaches)
+termcapinfo xterm* 'is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l'
