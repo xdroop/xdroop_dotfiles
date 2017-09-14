@@ -52,11 +52,11 @@ if [ "$PS1" ]; then
     	else 
             if [ -e /etc/fedora-release ] ; then
 	            RHVERSION=`rpm -q --queryformat '%{VERSION}' fedora-release`
-            fi
     	    else 
                 if [ -e /etc/redhat-release ] ; then
                     RHVERSION=`rpm -q --queryformat '%{RELEASE}' redhat-release-server | awk -F. '{print $1}'`
                 fi
+            fi
         fi
         if [ "$RHVERSION" ]; then
             # OK, CentOS or RedHat
