@@ -1,4 +1,4 @@
-#
+#  
 # /etc/profile.d/davem.sh
 #
 # Bash Customizations I like because I'm picky
@@ -23,7 +23,10 @@ alias fuck='sudo $(history -p \!\!)'
 
 # grep
 export GREP_COLOR="1;32"
-export GREP_OPTIONS=--color=auto
+if [ ! -e /etc/fedora-release ] ; then
+  # dammit Fedora
+  export GREP_OPTIONS=--color=auto
+fi
 
 # https://superuser.com/questions/611538/is-there-a-way-to-display-a-countdown-or-stopwatch-timer-in-a-terminal
 function countdown(){
@@ -44,21 +47,27 @@ if [ "$PS1" ]; then
     # No RPM -- no point.
     if [ -x /bin/rpm ] ; then
         # CentOS
-        RHVERSION=`rpm -q --queryformat '%{VERSION}' centos-release`
-        if [ -z "$RHVERSION" ]; then
-                # RedHat
-                RHVERSION=`rpm -q --queryformat '%{RELEASE}' redhat-release-server | awk -F. '{print $1}'`
+	    if [ -e /etc/centos-release ] ; then
+            RHVERSION=`rpm -q --queryformat '%{VERSION}' centos-release`
+    	else 
+            if [ -e /etc/fedora-release ] ; then
+	            RHVERSION=`rpm -q --queryformat '%{VERSION}' fedora-release`
+            fi
+    	    else 
+                if [ -e /etc/redhat-release ] ; then
+                    RHVERSION=`rpm -q --queryformat '%{RELEASE}' redhat-release-server | awk -F. '{print $1}'`
+                fi
         fi
         if [ "$RHVERSION" ]; then
             # OK, CentOS or RedHat
-            case $TERM in
+            case "$TERM" in
             xterm*)
                 PROMPT_COMMAND='printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
                 ;;
-            screen)
+            screen*)
                 PROMPT_COMMAND='printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
-                if [ $RHVERSION -ge 7 ]; then
-                    # Fuck
+                if [ $RHVERSION -ge 7 ] ; then 
+                    # Right now I am assuming that F25+ is RH7/C7 compatible
                     PROMPT_COMMAND='printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
                 fi
                 ;;
