@@ -47,12 +47,12 @@ if [ "$PS1" ]; then
     # No RPM -- no point.
     if [ -x /bin/rpm ] ; then
         # CentOS
-	    if [ -e /etc/centos-release ] ; then
+        if [ -e /etc/centos-release ] ; then
             RHVERSION=`rpm -q --queryformat '%{VERSION}' centos-release`
-    	else 
+        else 
             if [ -e /etc/fedora-release ] ; then
-	            RHVERSION=`rpm -q --queryformat '%{VERSION}' fedora-release`
-    	    else 
+                RHVERSION=`rpm -q --queryformat '%{VERSION}' fedora-release`
+            else 
                 if [ -e /etc/redhat-release ] ; then
                     RHVERSION=`rpm -q --queryformat '%{RELEASE}' redhat-release-server | awk -F. '{print $1}'`
                 fi
