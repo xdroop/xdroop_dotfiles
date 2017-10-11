@@ -1,3 +1,5 @@
+" DaveM _vimrc
+"  fo' windows
 set nocompatible
 source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
@@ -33,6 +35,7 @@ function ToggleWrap()
   endif
 endfunction
 
+set guifont=Courier_New:h9:cANSI:qDRAFT
 set nowrap 
 call ToggleWrap()
 set linebreak
