@@ -65,10 +65,15 @@ if [ "$PS1" ]; then
                 PROMPT_COMMAND='printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
                 ;;
             screen*)
+                # v6
                 PROMPT_COMMAND='printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
+		# v7
                 if [ $RHVERSION -ge 7 ] ; then 
-                    # Right now I am assuming that F25+ is RH7/C7 compatible
                     PROMPT_COMMAND='printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
+                fi
+		# Fedora
+                if [ $RHVERSION -ge 26 ] ; then 
+                    PROMPT_COMMAND='printf "\033k%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"'
                 fi
                 ;;
             *)
