@@ -17,6 +17,7 @@ alias today='export TODAY=`date +%Y-%m-%d` ; echo $TODAY'
 alias digs='dig +short'
 alias digg='dig @8.8.8.8'
 alias diggs='dig +short @8.8.8.8'
+alias shruggie="echo '¯\_(ツ)_/¯'"
 
 # sudo 
 alias fuck='sudo $(history -p \!\!)'
