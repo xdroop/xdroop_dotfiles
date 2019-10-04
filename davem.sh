@@ -17,10 +17,15 @@ alias today='export TODAY=`date +%Y-%m-%d` ; echo $TODAY'
 alias digs='dig +short'
 alias digg='dig @8.8.8.8'
 alias diggs='dig +short @8.8.8.8'
+
+# Because why not
 alias shruggie="echo '¯\_(ツ)_/¯'"
 
-# sudo 
+# Because sudo 
 alias fuck='sudo $(history -p \!\!)'
+
+# ls long time reverse
+alias l8r='ls -ltr'
 
 # grep
 export GREP_COLOR="1;32"
