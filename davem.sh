@@ -25,14 +25,19 @@ alias shruggie="echo '¯\_(ツ)_/¯'"
 alias fuck='sudo $(history -p \!\!)'
 
 # ls long time reverse
-alias l8r='ls -ltr'
+alias l8r='ls -ltr --color=auto'
 
 # grep
 export GREP_COLOR="1;32"
-if [ ! -e /etc/fedora-release ] ; then
-  # dammit Fedora
-  export GREP_OPTIONS=--color=auto
-fi
+alias grep='grep --color=auto'
+
+# make/change directory
+function mcd(){
+    mkdir $1
+    if [ -d $1 ]; then
+      cd $1
+    fi
+}
 
 # merge github repo I forked from into my local fork
 # I alwasy forget how to do this
