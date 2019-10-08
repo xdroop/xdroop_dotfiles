@@ -34,6 +34,10 @@ if [ ! -e /etc/fedora-release ] ; then
   export GREP_OPTIONS=--color=auto
 fi
 
+# merge github repo I forked from into my local fork
+# I alwasy forget how to do this
+alias git-pull-master='git fetch upstream ; git merge upstream/master ; git push'
+
 # https://superuser.com/questions/611538/is-there-a-way-to-display-a-countdown-or-stopwatch-timer-in-a-terminal
 function countdown(){
    date1=$((`date +%s` + $1)); 
@@ -66,6 +70,8 @@ if [ "$PS1" ]; then
         fi
         if [ "$RHVERSION" ]; then
             # OK, CentOS or RedHat
+            # Thank you CentOS non-integer-version 8.0. :(
+            RHVERSION_MAJOR=`echo $RHVERSION | sed -e 's/\..*$//'`
             case "$TERM" in
             xterm*)
                 PROMPT_COMMAND='printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
@@ -74,11 +80,11 @@ if [ "$PS1" ]; then
                 # v6
                 PROMPT_COMMAND='printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
 		# v7
-                if [ $RHVERSION -ge 7 ] ; then 
+                if [ $RHVERSION_MAJOR -ge 7 ] ; then 
                     PROMPT_COMMAND='printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
                 fi
 		# Fedora
-                if [ $RHVERSION -ge 26 ] ; then 
+                if [ $RHVERSION_MAJOR -ge 26 ] ; then 
                     PROMPT_COMMAND='printf "\033k%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"'
                 fi
                 ;;
