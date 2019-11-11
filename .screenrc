@@ -10,6 +10,10 @@ autodetach on
 startup_message off
 # sane-er window list
 windowlist string "%4n %h%=%f"
+# because we like rscreen, we need to set each new session to be a
+#  login shell so the shit like .bash_profile gets run, since the
+#  invoking rscreen session isn't really a login shell
+shell -$SHELL
 # Change the xterm initialization string from is2=\E[!p\E[?3;4l\E[4l\E>
 # (This fixes the "Aborted because of window size change" konsole symptoms found
 #  in bug #134198)
