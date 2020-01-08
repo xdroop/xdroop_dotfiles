@@ -39,8 +39,11 @@ function mcd(){
     fi
 }
 
+# wait for the indicated host to be responsive to pings
+waiton() { ping $1 | grep --line-buffered "bytes from" | head -1 > /dev/null ; }
+
 # merge github repo I forked from into my local fork
-# I alwasy forget how to do this
+# I always forget how to do this
 alias git-pull-master='git fetch upstream ; git merge upstream/master ; git push'
 
 # https://superuser.com/questions/611538/is-there-a-way-to-display-a-countdown-or-stopwatch-timer-in-a-terminal
