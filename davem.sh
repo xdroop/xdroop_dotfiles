@@ -40,6 +40,7 @@ function mcd(){
 }
 
 # wait for the indicated host to be responsive to pings
+# https://serverfault.com/questions/152795/linux-command-to-wait-for-a-ssh-server-to-be-up
 waiton() { ping $1 | grep --line-buffered "bytes from" | head -1 > /dev/null ; }
 
 # merge github repo I forked from into my local fork
