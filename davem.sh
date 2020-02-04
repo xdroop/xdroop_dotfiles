@@ -58,6 +58,8 @@ function countdown(){
 
 # Screen session and terminal window titles
 #  This "should" be reasonably portable/harmless-to-systems-that-don't-understand
+#  Based on https://superuser.com/questions/560223/set-gnu-screen-title-within-ssh
+#  plus a whole lot of fucking around
 # If we are interactive
 if [ "$PS1" ]; then
   # Print out a string for screen to print as a session title,
