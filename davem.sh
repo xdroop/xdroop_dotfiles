@@ -62,7 +62,10 @@ function countdown(){
 #  plus a whole lot of fucking around
 # If we are interactive
 if [ "$PS1" ]; then
-  # Print out a string for screen to print as a session title,
-  #  then print out a string for putty/kitty/xterm to use as a window title.
-  PROMPT_COMMAND='printf "\033k%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}";printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
+  # If we are in a screen session, print out an escape sequence for the screen session title.
+  # Either way, print out an escape sequence for putty/kitty/xterm to use as a window title.
+PROMPT_COMMAND='if [ "$TERM" == "screen" ] ;then \
+  printf "\033k%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"; \
+fi; \
+printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
 fi
