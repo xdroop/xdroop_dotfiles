@@ -56,3 +56,11 @@ function countdown(){
    done
 }
 
+# Screen session and terminal window titles
+#  This "should" be reasonably portable/harmless-to-systems-that-don't-understand
+# If we are interactive
+if [ "$PS1" ]; then
+  # Print out a string for screen to print as a session title,
+  #  then print out a string for putty/kitty/xterm to use as a window title.
+  PROMPT_COMMAND='printf "\033k%s@%s:%s\033\\" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}";printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/~}"'
+fi
