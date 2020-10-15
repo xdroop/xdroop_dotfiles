@@ -39,6 +39,15 @@ function mcd(){
     fi
 }
 
+# edit the ~/.ssh/known_hosts file to remove the passed line number.
+#  source: https://chainsawonatireswing.com/2012/04/06/an-easier-quicker-way-to-edit-the-known_hosts-file-when-an-ssh-server-changes-its-host-key/
+trim-ssh () {
+  cp ~/.ssh/known_hosts ~/.ssh/known_hosts_$(date +%Y%m%d-%H%M%S) ;
+  sed -e "$1d" ~/.ssh/known_hosts > ~/.ssh/known_hosts_new ;
+  mv -f ~/.ssh/known_hosts_new ~/.ssh/known_hosts ;
+  chmod 644 ~/.ssh/known_hosts
+}
+
 # wait for the indicated host to be responsive to pings
 # https://serverfault.com/questions/152795/linux-command-to-wait-for-a-ssh-server-to-be-up
 waiton() { ping $1 | grep --line-buffered "bytes from" | head -1 > /dev/null ; }
