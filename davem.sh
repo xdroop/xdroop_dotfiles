@@ -10,8 +10,9 @@
 #  way, otherwise this ends up as .bashrc.
 
 # Time functions
-alias now="date '+%s'"
-alias today='export TODAY=`date +%Y-%m-%d` ; echo $TODAY'
+alias now="/usr/bin/date '+%s'"
+alias today='export TODAY=`/usr/bin/date +%Y-%m-%d` ; echo $TODAY'
+alias sdate='/usr/bin/date --rfc-3339=seconds'
 
 # name resolution macros
 alias digs='dig +short'
@@ -42,7 +43,7 @@ function mcd(){
 # edit the ~/.ssh/known_hosts file to remove the passed line number.
 #  source: https://chainsawonatireswing.com/2012/04/06/an-easier-quicker-way-to-edit-the-known_hosts-file-when-an-ssh-server-changes-its-host-key/
 trim-ssh () {
-  cp ~/.ssh/known_hosts ~/.ssh/known_hosts_$(date +%Y%m%d-%H%M%S) ;
+  cp ~/.ssh/known_hosts ~/.ssh/known_hosts_$(/usr/bin/date +%Y%m%d-%H%M%S) ;
   sed -e "$1d" ~/.ssh/known_hosts > ~/.ssh/known_hosts_new ;
   mv -f ~/.ssh/known_hosts_new ~/.ssh/known_hosts ;
   chmod 644 ~/.ssh/known_hosts
@@ -58,9 +59,9 @@ alias git-pull-master='git fetch upstream ; git merge upstream/master ; git push
 
 # https://superuser.com/questions/611538/is-there-a-way-to-display-a-countdown-or-stopwatch-timer-in-a-terminal
 function countdown(){
-   date1=$((`date +%s` + $1)); 
-   while [ "$date1" -ge `date +%s` ]; do 
-     echo -ne "$(date -u --date @$(($date1 - `date +%s`)) +%H:%M:%S)\r";
+   date1=$((`/usr/bin/date +%s` + $1)); 
+   while [ "$date1" -ge `/usr/bin/date +%s` ]; do 
+     echo -ne "$(/usr/bin/date -u --/usr/bin/date @$(($date1 - `/usr/bin/date +%s`)) +%H:%M:%S)\r";
      sleep 0.1
    done
 }
